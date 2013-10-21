@@ -44,6 +44,18 @@ if has('win32') && has('gui_win32') && has('gui_running')
 	" 使用CTRL-X，CTRL-C 和 CTRL-V 这些标准的 MS-Windows 操作方式
 	"source $VIMRUNTIME/mswin.vim
 
+" Mac
+elseif has('gui_running') && has('macunix')
+
+	" 配置文件变量
+	let g:my_vimrc = $HOME.'/.vim/vimrc'
+	let g:vimrc_home = $HOME.'/.vim'
+
+	set guifont=Menlo\ Regular:h14
+
+	" 高亮光标所在的屏幕行
+	set cursorline
+
 " Linux环境
 elseif has('unix')
 
@@ -53,6 +65,7 @@ elseif has('unix')
 
 	" 不高亮光标所在的屏幕行
 	set nocursorline
+
 endif
 
 "------------------------------------------------------------------------------
@@ -91,7 +104,7 @@ set shiftwidth=4
 " 执行编辑操作，如插入 <Tab> 或者使用 <BS> 时，把 <Tab> 算作空格的数目
 set softtabstop=4
 " 用空格展开<Tab>
-set noexpandtab
+set expandtab
 " 光标上下两侧最少保留的屏幕行数
 set scrolloff=5
 " 如果设置 'nowrap'，光标左右两侧保留的最少屏幕列数
