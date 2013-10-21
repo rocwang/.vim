@@ -364,8 +364,9 @@ let Tlist_Display_Prototype = 0
 let Tlist_Compact_Format = 1
 let Tlist_Use_Right_Window = 0
 let Tlist_Exit_OnlyWindow = 1      "如果taglist窗口是最后一个窗口，则退出vim
-let tlist_php_settings = 'php;c:class;d:constant;f:function' 
+let tlist_php_settings = 'php;c:class;d:constant;f:function'
 let Tlist_WinWidth = 30
+let Tlist_Ctags_Cmd = 'etags'
 
 " yankring
 " 配置yankring历史文件名前缀
