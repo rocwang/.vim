@@ -22,49 +22,49 @@ filetype plugin indent on
 " Windows环境
 if has('win32') && has('gui_win32') && has('gui_running')
 
-	" 配置文件变量
-	let g:my_vimrc = $HOME.'\vimfiles\vimrc'
-	let g:vimrc_home = $HOME.'\vimfiles'
+    " 配置文件变量
+    let g:my_vimrc = $HOME.'\vimfiles\vimrc'
+    let g:vimrc_home = $HOME.'\vimfiles'
 
-	" 设置语言为英语
-	lang english
+    " 设置语言为英语
+    lang english
 
-	" 改变当前工作目录为“桌面”
-	cd $HOME/Desktop
-	" 设置英文字体
-	set guifont=Bitstream_Vera_Sans_Mono:h11:cANSI
-	" 设置中文字体
-	set guifontwide=simhei:h11:cGB2312
-	" 启动时最大化窗口
-	autocmd GUIEnter * simalt ~x
+    " 改变当前工作目录为“桌面”
+    cd $HOME/Desktop
+    " 设置英文字体
+    set guifont=Bitstream_Vera_Sans_Mono:h11:cANSI
+    " 设置中文字体
+    set guifontwide=simhei:h11:cGB2312
+    " 启动时最大化窗口
+    autocmd GUIEnter * simalt ~x
 
-	" 高亮光标所在的屏幕行
-	set cursorline
+    " 高亮光标所在的屏幕行
+    set cursorline
 
-	" 使用CTRL-X，CTRL-C 和 CTRL-V 这些标准的 MS-Windows 操作方式
-	"source $VIMRUNTIME/mswin.vim
+    " 使用CTRL-X，CTRL-C 和 CTRL-V 这些标准的 MS-Windows 操作方式
+    "source $VIMRUNTIME/mswin.vim
 
-" Mac
+    " Mac
 elseif has('gui_running') && has('macunix')
 
-	" 配置文件变量
-	let g:my_vimrc = $HOME.'/.vim/vimrc'
-	let g:vimrc_home = $HOME.'/.vim'
+    " 配置文件变量
+    let g:my_vimrc = $HOME.'/.vim/vimrc'
+    let g:vimrc_home = $HOME.'/.vim'
 
-	set guifont=Menlo\ Regular:h14
+    set guifont=Menlo\ Regular:h14
 
-	" 高亮光标所在的屏幕行
-	set cursorline
+    " 高亮光标所在的屏幕行
+    set cursorline
 
-" Linux环境
+    " Linux环境
 elseif has('unix')
 
-	" 配置文件变量
-	let g:my_vimrc = $HOME.'/.vim/vimrc'
-	let g:vimrc_home = $HOME.'/.vim'
+    " 配置文件变量
+    let g:my_vimrc = $HOME.'/.vim/vimrc'
+    let g:vimrc_home = $HOME.'/.vim'
 
-	" 不高亮光标所在的屏幕行
-	set nocursorline
+    " 不高亮光标所在的屏幕行
+    set nocursorline
 
 endif
 
@@ -345,6 +345,10 @@ vnoremap <Leader>a=> :Align =><CR>
 "------------------------------------------------------------------------------
 " 插件设置
 "------------------------------------------------------------------------------
+"Vim Browser Reload for Mac
+let g:returnAppFlag = 1
+let g:returnApp = "MacVim"
+
 "Indent Guides
 let g:indent_guides_guide_size=1
 
@@ -366,7 +370,7 @@ let Tlist_Use_Right_Window = 0
 let Tlist_Exit_OnlyWindow = 1      "如果taglist窗口是最后一个窗口，则退出vim
 let tlist_php_settings = 'php;c:class;d:constant;f:function'
 let Tlist_WinWidth = 30
-let Tlist_Ctags_Cmd = 'etags'
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 
 " yankring
 " 配置yankring历史文件名前缀
@@ -398,14 +402,14 @@ let g:pdv_cfg_Version = '$Id$'
 " 二进制文件
 " vim -b : 用xxd格式编辑二进制文件
 augroup Binary
-	autocmd!
-	autocmd BufReadPre  *.bin,*.o let &bin=1
-	autocmd BufReadPost *.bin,*.o if &bin | %!xxd
-	autocmd BufReadPost *.bin,*.o set ft=xxd | endif
-	autocmd BufWritePre *.bin,*.o if &bin | %!xxd -r
-	autocmd BufWritePre *.bin,*.o endif
-	autocmd BufWritePost *.bin,*.o if &bin | %!xxd
-	autocmd BufWritePost *.bin,*.o set nomod | endif
+    autocmd!
+    autocmd BufReadPre  *.bin,*.o let &bin=1
+    autocmd BufReadPost *.bin,*.o if &bin | %!xxd
+    autocmd BufReadPost *.bin,*.o set ft=xxd | endif
+    autocmd BufWritePre *.bin,*.o if &bin | %!xxd -r
+    autocmd BufWritePre *.bin,*.o endif
+    autocmd BufWritePost *.bin,*.o if &bin | %!xxd
+    autocmd BufWritePost *.bin,*.o set nomod | endif
 augroup END
 
 " Javascript
@@ -437,23 +441,23 @@ let g:SuperTabLongestHighlight = 1
 
 " Rainbow Parentheses
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['black',       'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
 let g:rbpt_max = 16
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -466,20 +470,20 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " 打开文件时，自动跳转到光标最后所在的位置
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+                \| exe "normal! g'\"" | endif
 endif
 
 " 切换QuickFix窗口
 com! -bang -nargs=? QFix cal QFixToggle(<bang>0)
 fu! QFixToggle(forced)
-	if exists("g:qfix_win") && a:forced == 0 
-		cclose
-		unlet g:qfix_win
-	else 
-		copen 10
-		let g:qfix_win = bufnr("$")
-	en
+    if exists("g:qfix_win") && a:forced == 0 
+        cclose
+        unlet g:qfix_win
+    else 
+        copen 10
+        let g:qfix_win = bufnr("$")
+    en
 endf
 nnoremap <leader>f :QFix<CR>
 
