@@ -9,6 +9,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " NOTE: comments after Bundle commands are not allowed.
+Bundle 'bling/vim-airline'
 Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'gmarik/vundle'
@@ -16,6 +17,7 @@ Bundle 'hallison/vim-markdown'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'jlanzarotta/bufexplorer'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -25,10 +27,10 @@ Bundle 'tpope/vim-surround'
 Bundle 'xolox/vim-misc'
 Bundle 'xolox/vim-shell'
 Bundle 'yegappan/mru'
-Bundle 'maxbrunsfeld/vim-yankstack'
 
 " Color scheme
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'chriskempson/base16-vim'
 Bundle 'tomasr/molokai'
 
 " non-GitHub repos
@@ -83,7 +85,8 @@ elseif has('gui_running') && has('macunix')
     let g:my_vimrc = $HOME.'/.vim/vimrc'
     let g:vimrc_home = $HOME.'/.vim'
 
-    set guifont=Menlo\ Regular:h14
+    "set guifont=Menlo\ Regular:h14
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
     set guifontwide=Heiti\ SC\ Light:h14
 
     " 高亮光标所在的屏幕行
@@ -213,7 +216,7 @@ set nosplitbelow
 " 窗口的分割会把新窗口放到当前窗口之右
 set nosplitright
 " 状态栏
-set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
+"set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
 " 设为 "dark" 时，Vim 试图使用深色背景上看起来舒服的颜色
 set background=dark
 " 在可视模式下可以选择一个方块
@@ -245,6 +248,8 @@ runtime ftplugin/man.vim
 "------------------------------------------------------------------------------
 "Indent Guides
 let g:indent_guides_guide_size=1
+let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
 
 " taglist
 let g:Tlist_Process_File_Always = 0
@@ -274,6 +279,13 @@ let g:shell_mappings_enabled = 0
 let g:SuperTabMappingForward = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
 let g:SuperTabLongestHighlight = 1
+
+" Air Line
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" Mini Buffer Explorer
+let g:miniBufExplorerAutoStart = 0
 
 "------------------------------------------------------------------------------
 " 自动命令
@@ -316,7 +328,7 @@ noremap <f6> :Open<cr>
 imap <f6> <c-o><f6>
 
 " F7 打开草稿
-noremap <f7> :Sscratch<cr>
+noremap <f7> :Scratch<cr>
 imap <f7> <c-o><f7>
 
 " F8 切换粘贴模式
