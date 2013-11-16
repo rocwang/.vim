@@ -238,7 +238,7 @@ set fileformats=unix,dos
 syntax on
 
 " 使用molokai颜色主题
-colorscheme molokai
+colorscheme solarized
 
 "打开 ":Man" 命令
 runtime ftplugin/man.vim
