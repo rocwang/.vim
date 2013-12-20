@@ -13,10 +13,11 @@ Bundle 'bling/vim-airline'
 Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
 Bundle 'hallison/vim-markdown'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'jlanzarotta/bufexplorer'
-Bundle 'junegunn/vim-easy-align'
+Bundle "mattn/emmet-vim"
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
@@ -366,9 +367,6 @@ noremap <leader>e <c-w><c-v><c-l>:exec 'e! '.g:my_vimrc<cr>
 " ,<cr> 取消高亮
 noremap <leader><enter> :nohlsearch<cr>
 
-" ,l 关闭Tab，行尾空格的显示
-noremap <leader>l :set list!<cr>
-
 " ,w 保存文件
 noremap <leader>w :w<cr>
 
@@ -399,6 +397,12 @@ noremap <leader>n :cn<cr>
 " ,p 跳转到上一个错误
 noremap <leader>p :cp<cr>
 
+" ,= 依逗号对齐
+noremap <Leader>= :Tabularize /=<cr>
+
+" ,= 依等号对齐
+noremap <Leader>: :Tabularize /:<cr>
+
 "------------------------------------------------------------------------------
 " 其他键映射
 "------------------------------------------------------------------------------
@@ -407,7 +411,7 @@ noremap <leader>p :cp<cr>
 noremap / /\v
 
 " 用Tab跳转到匹配的括号
-noremap <tab> %
+map <tab> %
 
 " 自动换行时可在行中移动
 noremap j gj
@@ -419,12 +423,6 @@ noremap ; :
 " 在插入和命令模式下用jj代替ESC
 noremap! jj <esc>
 
-" 在分割的窗口间移动
-noremap <c-h> <c-w>h
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-
 " 在buffer间切换
 noremap <s-h> :bp<cr>
 noremap <s-l> :bn<cr>
@@ -432,3 +430,9 @@ noremap <s-l> :bn<cr>
 " 增减buffer高度
 noremap + <c-w>+
 noremap - <c-w>-
+
+" 在分割的窗口间移动
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
