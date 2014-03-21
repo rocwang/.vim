@@ -10,37 +10,33 @@ call vundle#rc()
 
 " NOTE: comments after Bundle commands are not allowed.
 Bundle 'bling/vim-airline'
+"Bundle 'brookhong/DBGPavim'
 Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'gmarik/vundle'
+Bundle 'groenewege/vim-less'
 Bundle 'godlygeek/tabular'
 Bundle 'hallison/vim-markdown'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'jlanzarotta/bufexplorer'
+Bundle 'kien/ctrlp.vim'
 Bundle "mattn/emmet-vim"
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-shell'
-Bundle 'yegappan/mru'
-
-" Color scheme
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/base16-vim'
-Bundle 'tomasr/molokai'
 
 " non-GitHub repos
-Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'git://repo.or.cz/vcscommand'
 
 " vim-scripts.org repos, may be outdated.
 Bundle 'FencView.vim'
-Bundle 'a.vim'
 Bundle 'matchit.zip'
 Bundle 'scratch.vim'
 Bundle 'taglist.vim'
@@ -87,8 +83,8 @@ elseif has('gui_running') && has('macunix')
     let g:vimrc_home = $HOME.'/.vim'
 
     "set guifont=Menlo\ Regular:h14
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14
-    set guifontwide=Heiti\ SC\ Light:h14
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+    set guifontwide=Heiti\ SC\ Light:h12
 
     " 高亮光标所在的屏幕行
     set cursorline
@@ -239,7 +235,7 @@ set fileformats=unix,dos
 syntax on
 
 " 使用molokai颜色主题
-colorscheme solarized
+colorscheme base16-tomorrow
 
 "打开 ":Man" 命令
 runtime ftplugin/man.vim
@@ -288,6 +284,16 @@ let g:airline_powerline_fonts = 1
 " Mini Buffer Explorer
 let g:miniBufExplorerAutoStart = 0
 
+" Syntastic
+let g:syntastic_ignore_files = ['Gruntfile.js$']
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_html_checkers = ['validator']
+"let g:syntastic_html_validator_parser = 'html5'
+
+" DBGPavim
+let g:dbgPavimPort         = 9000
+let g:dbgPavimBreakAtEntry = 0
+
 "------------------------------------------------------------------------------
 " 自动命令
 "------------------------------------------------------------------------------
@@ -320,14 +326,6 @@ imap <f3> <c-o><f3>
 noremap <f4> :TlistToggle<cr>
 imap <f4> <c-o><f4>
 
-" F5 检查语法
-noremap <f5> :SyntasticCheck<cr>
-imap <f5> <c-o><f5>
-
-" F6 打开URL/文件/目录/电子邮件地址
-noremap <f6> :Open<cr>
-imap <f6> <c-o><f6>
-
 " F7 打开草稿
 noremap <f7> :Scratch<cr>
 imap <f7> <c-o><f7>
@@ -336,21 +334,13 @@ imap <f7> <c-o><f7>
 noremap <f8> :set invpaste paste?<cr>
 imap <f8> <c-o><f8>
 
-" 最近打开的文件
-noremap <f9> :Mru<cr>
-imap <f9> <c-o><f9>
+" F9 检查语法
+noremap <f9> :SyntasticCheck<cr>
+imap <f9> <c-o><f5>
 
-" 切换Yank Stack的显示
+" F10 切换Yank Stack的显示
 noremap <f10> :Yanks<cr>
 imap <f10> <c-o><f10>
-
-" 全屏
-noremap <f11> :Fullscreen<cr>
-imap <f11> <c-o><f11>
-
-" 在.cpp/.c和.h文件间切换
-noremap <f12> :A<cr>
-imap <f12> <c-o><f12>
 
 "------------------------------------------------------------------------------
 " Learder键映射
@@ -397,11 +387,14 @@ noremap <leader>n :cn<cr>
 " ,p 跳转到上一个错误
 noremap <leader>p :cp<cr>
 
-" ,= 依逗号对齐
+" ,= 依等号对齐
 noremap <Leader>= :Tabularize /=<cr>
 
-" ,= 依等号对齐
+" ,: 依冒号对齐
 noremap <Leader>: :Tabularize /:<cr>
+
+" ,> 依=>对齐
+noremap <Leader>> :Tabularize /=><cr>
 
 "------------------------------------------------------------------------------
 " 其他键映射
