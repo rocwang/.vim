@@ -10,7 +10,7 @@ call vundle#rc()
 
 " NOTE: comments after Bundle commands are not allowed.
 Bundle 'bling/vim-airline'
-"Bundle 'brookhong/DBGPavim'
+Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'gmarik/vundle'
@@ -106,7 +106,7 @@ endif
 "------------------------------------------------------------------------------
 
 " 设置Vim相关字符编码
-set encoding=utf-8
+set encoding=utf-8 nobomb
 set fileencoding=utf-8
 set fileencodings=utf-8,chinese,ucs-bom
 set termencoding=utf-8
@@ -116,7 +116,9 @@ exec 'set backupdir='.fnameescape(g:vimrc_home.'/.vim_backup/')
 "" swap文件存放目录
 exec 'set directory='.fnameescape(g:vimrc_home.'/.vim_swap//')
 "" 持久撤销文件存放目录
-exec 'set undodir='.fnameescape(g:vimrc_home.'/.vim_undo/')
+if exists("&undodir")
+    exec 'set undodir='.fnameescape(g:vimrc_home.'/.vim_undo/')
+endif
 " 覆盖文件前不创建一个备份
 set backup
 " 持久撤销功能
@@ -130,13 +132,11 @@ set foldlevel=99
 " 语法高亮项目指定折叠
 set foldmethod=syntax
 " 文件里的 <tab> 代表的空格数
-set tabstop=4
+set tabstop=2
 " (自动) 缩进每一步使用的空白数目
-set shiftwidth=4
+set shiftwidth=2
 " 执行编辑操作，如插入 <tab> 或者使用 <bs> 时，把 <tab> 算作空格的数目
-set softtabstop=4
-" 用空格展开<tab>
-set expandtab
+set softtabstop=2
 " 光标上下两侧最少保留的屏幕行数
 set scrolloff=5
 " 如果设置 'nowrap'，光标左右两侧保留的最少屏幕列数
@@ -226,6 +226,36 @@ set cmdheight=1
 set fileformat=unix
 " 设置<eol>格式
 set fileformats=unix,dos
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+"set clipboard=unnamed
+" Allow cursor keys in insert mode
+set esckeys
+" Don’t add empty newlines at the end of files
+set binary
+set noeol
+" Respect modeline in files
+set modeline
+set modelines=4
+" Enable per-directory .vimrc files and disable unsafe commands in them
+"set exrc
+"set secure
+" Enable mouse in all modes
+"set mouse=a
+" Disable error bells
+"set noerrorbells
+" Don’t reset cursor to start of line when moving around.
+set nostartofline
+" Don’t show the intro message when starting Vim
+set shortmess=filnxtToOI
+" Show the filename in the window titlebar
+set title
+" Use relative line numbers
+if exists("&relativenumber")
+    set relativenumber
+    au BufReadPost * set relativenumber
+endif
+" 用空格展开<tab>
+set expandtab
 
 "------------------------------------------------------------------------------
 " 其他设置
@@ -245,7 +275,7 @@ runtime ftplugin/man.vim
 "------------------------------------------------------------------------------
 "Indent Guides
 let g:indent_guides_guide_size=1
-let g:indent_guides_start_level = 2
+let g:indent_guides_start_level = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
 " taglist
@@ -305,6 +335,13 @@ autocmd! BufWritePost *.php TlistUpdate
 " 打开文件时，自动跳转到光标最后所在的位置
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
             \| exe "normal! g'\"" | endif
+
+if has("autocmd")
+  " Enable file type detection
+  filetype on
+  " Treat .json files as .js
+  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+endif
 
 "------------------------------------------------------------------------------
 " 功能键映射
@@ -395,6 +432,19 @@ noremap <Leader>: :Tabularize /:<cr>
 
 " ,> 依=>对齐
 noremap <Leader>> :Tabularize /=><cr>
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    :%s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
+
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 "------------------------------------------------------------------------------
 " 其他键映射
