@@ -9,31 +9,29 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " NOTE: comments after Bundle commands are not allowed.
+Bundle "mattn/emmet-vim"
 Bundle 'bling/vim-airline'
+Bundle 'chrisbra/csv.vim'
+Bundle 'chriskempson/base16-vim'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'gmarik/vundle'
-Bundle 'groenewege/vim-less'
 Bundle 'godlygeek/tabular'
+Bundle 'groenewege/vim-less'
 Bundle 'hallison/vim-markdown'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'jlanzarotta/bufexplorer'
 Bundle 'kien/ctrlp.vim'
-Bundle "mattn/emmet-vim"
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'rizzatti/funcoo.vim'
 Bundle 'rizzatti/dash.vim'
+Bundle 'rizzatti/funcoo.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'chriskempson/base16-vim'
-
-" non-GitHub repos
-Bundle 'git://repo.or.cz/vcscommand'
 
 " vim-scripts.org repos, may be outdated.
 Bundle 'FencView.vim'
@@ -132,11 +130,11 @@ set foldlevel=99
 " 语法高亮项目指定折叠
 set foldmethod=syntax
 " 文件里的 <tab> 代表的空格数
-set tabstop=2
+set tabstop=4
 " (自动) 缩进每一步使用的空白数目
-set shiftwidth=2
+set shiftwidth=4
 " 执行编辑操作，如插入 <tab> 或者使用 <bs> 时，把 <tab> 算作空格的数目
-set softtabstop=2
+set softtabstop=4
 " 光标上下两侧最少保留的屏幕行数
 set scrolloff=5
 " 如果设置 'nowrap'，光标左右两侧保留的最少屏幕列数
@@ -256,6 +254,7 @@ if exists("&relativenumber")
 endif
 " 用空格展开<tab>
 set expandtab
+set showbreak=↪
 
 "------------------------------------------------------------------------------
 " 其他设置
@@ -310,12 +309,13 @@ let g:SuperTabLongestHighlight = 1
 " Air Line
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'tomorrow'
 
 " Mini Buffer Explorer
 let g:miniBufExplorerAutoStart = 0
 
 " Syntastic
-let g:syntastic_ignore_files = ['Gruntfile.js$']
+let g:syntastic_ignore_files = ['Gruntfile.js$', '.css$']
 let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_html_checkers = ['validator']
 "let g:syntastic_html_validator_parser = 'html5'
@@ -433,6 +433,12 @@ noremap <Leader>: :Tabularize /:<cr>
 " ,> 依=>对齐
 noremap <Leader>> :Tabularize /=><cr>
 
+" ,| 依|对齐
+noremap <Leader>\| :Tabularize /\|<cr>
+
+" ,r| 依|对齐
+noremap <Leader>u\| :%s/ *\| */\|/<cr>
+
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
     let save_cursor = getpos(".")
@@ -479,3 +485,7 @@ noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
+
+" 插入空行，但不进入插入模式
+noremap <s-enter> O<esc>
+noremap <cr> o<esc>
